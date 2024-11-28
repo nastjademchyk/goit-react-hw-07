@@ -1,11 +1,23 @@
 import ContactForm from "./ContactForm/ContactForm";
 import ContactList from "./ContactList/ContactList";
 import SearchBox from "./SearchBox/SearchBox";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchContacts } from "../redux/contactsOps";
 
 function App() {
+  const dispatch = useDispatch();
+  const { items, isLoading, error } = useSelector((state) => state.contacts);
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   return (
     <div>
       <h1>Phonebook</h1>
+      {isLoading && <b>Loading tasks...</b>}
+      {error && <b>{error}</b>}
+      <p>{items.length > 0 && JSON.stringify(items, null, 2)}</p>
       <ContactForm />
       <SearchBox />
       <ContactList />

@@ -2,21 +2,30 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   items: [],
+  loading: false,
+  error: null,
 };
 
 const slice = createSlice({
   name: "contacts",
   initialState,
   reducers: {
-    addContact(state, action) {
-      state.items.push(action.payload);
+    fetchInprogress(state) {
+      state.isLoading = true;
     },
-    deleteContact(state, action) {
-      state.items = state.items.filter((item) => item.id !== action.payload);
+    fetchSuccess(state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.items = action.payload;
+    },
+    fetchError(state, action) {
+      state.isLoading = false;
+      state.error = action.payload;
     },
   },
 });
 
-export const { addContact, deleteContact } = slice.actions;
+export const { fetchInprogress, fetchSuccess, fetchError } = slice.actions;
 export const selectContacts = (state) => state.contacts.items;
+
 export default slice.reducer;
