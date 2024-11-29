@@ -17,7 +17,6 @@ function App() {
       <h1>Phonebook</h1>
       {isLoading && <b>Loading tasks...</b>}
       {error && <b>{error}</b>}
-      <p>{items.length > 0 && JSON.stringify(items, null, 2)}</p>
       <ContactForm />
       <SearchBox />
       <ContactList />
