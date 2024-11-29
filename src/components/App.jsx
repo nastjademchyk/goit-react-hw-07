@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div>
-      <h1>Phonebook</h1>
+      <h1>Phone book</h1>
       {isLoading && <b>Loading tasks...</b>}
       {error && <b>{error}</b>}
       <ContactForm />
